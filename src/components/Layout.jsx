@@ -8,15 +8,17 @@ import { Outlet } from "react-router-dom";
 function Layout() {
     return (
         <div>
-            <Nav />
-            <div className="p-5 md:text-xl">
-                <div className="md:flex gap-5">
-                    <Balance />
-                    <Input />
+            <div className="h-svh">
+                <Nav />
+                <div className="p-5 md:text-xl">
+                    <div className="md:flex gap-5">
+                        <Balance />
+                        <Input />
+                    </div>
+                    <Outlet />
                 </div>
-                <Outlet />
             </div>
-                <Footer />
+            <Footer />
         </div>
     );
 }
