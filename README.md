@@ -1,5 +1,5 @@
-#Expense Tracker App
-##Introduction
+# Expense Tracker App
+## Introduction
 
 This is a simple Expense Tracker application built using React. It allows users to add, view, and delete transactions, helping them keep track of their expenses.
 Features
@@ -8,7 +8,7 @@ Features
     View transaction history: The app displays a list of all transactions with details like transaction text, amount, category, and date.
     Delete transactions: Users can remove transactions from the history.
 
-##Technologies Used
+## Technologies Used
 
     React Library
     React Context API: Used for state management across components.
@@ -17,8 +17,8 @@ Features
     nanoid
     Toastfy Library
 
-##Usage
-
+## Usage
+    
     Add Transaction:
         Enter the transaction details including text, amount, and category.
         Click the "Add Transaction" button to add the transaction.
@@ -28,16 +28,15 @@ Features
     Delete Transaction:
         To delete a transaction, click the delete icon (red circle with cross) next to the transaction you want to remove.
 
-##Screenshots
+## Screenshots
 
 ![expenses react screen-shot 2](https://github.com/Mahdii-Kariimiian/Expenses-React/assets/134393975/378d28d6-35cd-4b9c-bfd3-3316aad7e64d)
 
 ![expenses react screen-shot 3](https://github.com/Mahdii-Kariimiian/Expenses-React/assets/134393975/cf9783fd-0448-448a-b811-8567e51963e8)
 
 
-Links
+## Links : https://yourexpenses.netlify.app/
 
-(Optional: Include screenshots of the application in action)
-Contributing
 
 Contributions are welcome! If you have any ideas, improvements, or bug fixes, feel free to open an issue or submit a pull request.
+
