@@ -48,31 +48,33 @@ function App() {
     };
 
     return (
-        <AppContext.Provider
-            value={{
-                text,
-                setText,
-                money,
-                setMoney,
-                category,
-                setCategory,
-                EventArray, //All of the Transactions
-                setEventArray,
-                editId,
-                startEditing, //Check if editing state is running
-                saveEditedEntry, //Save after editing
-            }}
-        >
-            <Header />
-            <div className="p-5 md:text-xl">
-                <div className="md:flex gap-5">
-                    <Balance />
-                    <Input />
-                </div>
-                <EventEntry />
-            </div>
-            <Footer />
-        </AppContext.Provider>
+        <div className="flex flex-col min-h-screen">
+            <AppContext.Provider
+                value={{
+                    text,
+                    setText,
+                    money,
+                    setMoney,
+                    category,
+                    setCategory,
+                    EventArray,
+                    setEventArray,
+                    editId,
+                    startEditing,
+                    saveEditedEntry,
+                }}
+            >
+                <Header />
+                <main className="flex-grow p-5 md:text-xl">
+                    <div className="md:flex gap-5">
+                        <Balance />
+                        <Input />
+                    </div>
+                    <EventEntry />
+                </main>
+                <Footer />
+            </AppContext.Provider>
+        </div>
     );
 }
 

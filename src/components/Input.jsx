@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
 import { nanoid } from "nanoid";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,6 +16,29 @@ function Input() {
         editId,
         saveEditedEntry,
     } = useContext(AppContext);
+
+    const [activeButton, setActiveButton] = useState("Expense");
+
+    // Handle amount input change
+    const handleAmountChange = (e) => {
+        let value = e.target.value;
+        if (activeButton === "Expense" && !value.startsWith("-")) {
+            value = `-${value}`;
+        } else if (activeButton === "Income" && value.startsWith("-")) {
+            value = value.substring(1);
+        }
+        setMoney(value);
+    };
+
+    // Handle button click
+    const handleButtonClick = (type) => {
+        setActiveButton(type);
+        if (type === "Expense" && !money.startsWith("-")) {
+            setMoney(`-${money}`);
+        } else if (type === "Income" && money.startsWith("-")) {
+            setMoney(money.substring(1));
+        }
+    };
 
     // Toastify
     const notifySuccess = () => {
@@ -42,19 +65,16 @@ function Input() {
         });
     };
 
-    // Functions
     function handleClick(e) {
         e.preventDefault();
-        if (text === "" || money === "" || isNaN(money)) {
+        if (text === "" || money === "" || isNaN(parseFloat(money))) {
             notifyError();
             return;
         }
 
         if (editId) {
-            // If editing, call save function
             saveEditedEntry();
         } else {
-            // Adding new entry
             const newEvent = {
                 id: nanoid(),
                 text,
@@ -68,6 +88,7 @@ function Input() {
         setText("");
         setMoney("");
         setCategory("no-category");
+        setActiveButton("Expense"); // Reset to Expense after submission
         notifySuccess();
     }
 
@@ -89,15 +110,33 @@ function Input() {
             <label className="pb-1" htmlFor="transaction-money">
                 Amount
             </label>
-            <input
-                onChange={(e) => setMoney(e.target.value)}
-                value={money}
-                type="number"
-                name="transaction-money"
-                className="py-2 px-2 mb-1 border-grey-300 border-2 rounded-md"
-                placeholder="(negative - expense, positive - income)"
-                required
-            />
+            <div className="flex gap-2">
+                <button
+                    type="button"
+                    className={`bg-red-800 text-white rounded-md px-2 text-sm ${activeButton === "Expense" ? "bg-red-600" : ""} hover:bg-red-700`}
+                    onClick={() => handleButtonClick("Expense")}
+                >
+                    Expense
+                </button>
+                <button
+                    type="button"
+                    className={`bg-lime-800 text-white rounded-md px-2 text-sm ${activeButton === "Income" ? "bg-lime-600" : ""} hover:bg-lime-700`}
+                    onClick={() => handleButtonClick("Income")}
+                >
+                    Income
+                </button>
+                <div>
+                    <input
+                        onChange={handleAmountChange}
+                        value={money}
+                        type="number"
+                        name="transaction-money"
+                        className="py-2 px-2 mb-1 border-grey-300 border-2 rounded-md"
+                        placeholder="(negative - expense, positive - income)"
+                        required
+                    />
+                </div>
+            </div>
 
             <label className="pb-1" htmlFor="Categories">
                 Categories
