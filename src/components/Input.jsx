@@ -5,7 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Input() {
-    // Use context to access the state of the app
     const {
         text,
         setText,
@@ -13,13 +12,14 @@ function Input() {
         setMoney,
         category,
         setCategory,
-        EventArray,
         setEventArray,
+        editId,
+        saveEditedEntry,
     } = useContext(AppContext);
 
-    // Success Toast function
+    // Toastify
     const notifySuccess = () => {
-        toast.success("Transaction added successfully", {
+        toast.success("Transaction added/updated successfully", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -30,9 +30,8 @@ function Input() {
         });
     };
 
-    // Error Toast function
     const notifyError = () => {
-        toast.error("Please enter a valid amount and text", {
+        toast.error("Please enter a valid amount or text", {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -43,21 +42,29 @@ function Input() {
         });
     };
 
-    // Add entry
+    // Functions
     function handleClick(e) {
         e.preventDefault();
-        if (text === "" || money === "") {
+        if (text === "" || money === "" || isNaN(money)) {
             notifyError();
             return;
         }
 
-        const newEvent = {
-            id: nanoid(),
-            text,
-            money,
-            category,
-        };
-        setEventArray((prevArray) => [...prevArray, newEvent]);
+        if (editId) {
+            // If editing, call save function
+            saveEditedEntry();
+        } else {
+            // Adding new entry
+            const newEvent = {
+                id: nanoid(),
+                text,
+                money,
+                category,
+                date: new Date().toLocaleDateString(),
+            };
+            setEventArray((prevArray) => [...prevArray, newEvent]);
+        }
+
         setText("");
         setMoney("");
         setCategory("no-category");
@@ -65,7 +72,7 @@ function Input() {
     }
 
     return (
-        <form className=" md:w-3/4 flex text-lg flex-col border-2 border-teal-600 rounded-md p-5 mb-2">
+        <form className="md:w-3/4 flex text-lg flex-col border-2 border-teal-800 rounded-md p-5 mb-2">
             <label className="pb-1" htmlFor="transaction-text">
                 Transaction
             </label>
@@ -102,7 +109,7 @@ function Input() {
                 name="Categories"
                 id="Categories"
             >
-                <option value="no-category">No Category</option>
+                <option value="no category">No Category</option>
                 <option value="Groceries">Groceries</option>
                 <option value="Transportation">Transportation</option>
                 <option value="mortgage or rent">Mortgage or Rent</option>
@@ -118,13 +125,11 @@ function Input() {
 
             <div>
                 <button
-                    onClick={(e) => {
-                        handleClick(e);
-                    }}
-                    className=" whitespace-nowrap md:m-auto p-2 md:px-10 mt-3 rounded-md bg-teal-600 text-white font-bold hover:bg-teal-500"
+                    onClick={handleClick}
+                    className="whitespace-nowrap md:m-auto p-2 md:px-10 mt-3 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-600"
                     type="submit"
                 >
-                    Add transaction
+                    {editId ? "Save changes" : "Add transaction"}
                 </button>
             </div>
             <ToastContainer />

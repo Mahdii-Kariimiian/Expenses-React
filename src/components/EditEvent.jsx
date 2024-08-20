@@ -6,16 +6,7 @@ function EditEvent() {
     const navigation = useNavigate();
     const id = useParams().id;
 
-    const {
-        EventArray,
-        setEventArray,
-        setText,
-        setCategory,
-        setMoney,
-        text,
-        money,
-        category,
-    } = useContext(AppContext);
+    const { EventArray, setEventArray } = useContext(AppContext);
 
     const currentEvent = EventArray.find((event) => event.id === id);
 

@@ -2,9 +2,9 @@ import React from "react";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-function Nav() {
+function Header() {
     return (
-        <nav className="bg-teal-700 text-white font-bold flex items-center gap-2 px-5 py-7 ">
+        <nav className="bg-teal-900 text-white font-bold flex items-center gap-2 px-5 py-7 ">
             <h1 className="sm:text-2xl">YOUR Expenses </h1>
             <h1 className="text-3xl">
                 <FaMoneyBillTransfer />
@@ -22,4 +22,4 @@ function Nav() {
     );
 }
 
-export default Nav;
+export default Header;
