@@ -12,18 +12,18 @@ function App() {
     const [text, setText] = useState("");
     const [money, setMoney] = useState("");
     const [category, setCategory] = useState("no-category");
-    const [EventArray, setEventArray] = useState(() => {
+    const [eventArray, setEventArray] = useState(() => {
         const storedEventArray = localStorage.getItem("EventArray");
         return storedEventArray ? JSON.parse(storedEventArray) : [];
     });
     const [editId, setEditId] = useState(null);
 
     useEffect(() => {
-        localStorage.setItem("EventArray", JSON.stringify(EventArray));
-    }, [EventArray]);
+        localStorage.setItem("EventArray", JSON.stringify(eventArray));
+    }, [eventArray]);
 
     const startEditing = (id) => {
-        const eventToEdit = EventArray.find((event) => event.id === id);
+        const eventToEdit = eventArray.find((event) => event.id === id);
         if (eventToEdit) {
             setText(eventToEdit.text);
             setMoney(eventToEdit.money);
@@ -34,7 +34,7 @@ function App() {
 
     const saveEditedEntry = () => {
         if (editId !== null) {
-            const updatedArray = EventArray.map((event) =>
+            const updatedArray = eventArray.map((event) =>
                 event.id === editId
                     ? { ...event, text, money, category }
                     : event
@@ -57,7 +57,7 @@ function App() {
                     setMoney,
                     category,
                     setCategory,
-                    EventArray,
+                    eventArray,
                     setEventArray,
                     editId,
                     startEditing,

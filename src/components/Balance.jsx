@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 
 function Balance() {
-    const { EventArray } = useContext(AppContext);
+    const { eventArray } = useContext(AppContext);
 
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -10,7 +10,7 @@ function Balance() {
 
     useEffect(() => {
         setIncome(
-            EventArray.reduce((acc, event) => {
+            eventArray.reduce((acc, event) => {
                 if (event.money > 0) {
                     return Number(acc) + Number(event.money);
                 } else {
@@ -20,7 +20,7 @@ function Balance() {
         );
 
         setExpense(
-            EventArray.reduce((acc, event) => {
+            eventArray.reduce((acc, event) => {
                 if (event.money < 0) {
                     return Number(acc) - Number(event.money);
                 } else {
@@ -28,7 +28,7 @@ function Balance() {
                 }
             }, 0)
         );
-    }, [EventArray]);
+    }, [eventArray]);
 
     useEffect(() => {
         setBalance((prev) => (prev = income - expense));
@@ -36,16 +36,16 @@ function Balance() {
 
     return (
         <div className="min-w-[280px] md:w-1/4 flex flex-col justify-between text-center font-bold border-2 border-teal-800 rounded-md p-5 mb-2">
-            <h2 className="pb-4 text-xl border-2 py-5 my-5 border-teal-800 rounded-md">
+            <h2 className="pb-4 text-xl border-2 py-5 border-teal-800 rounded-md whitespace-nowrap">
                 Balance: <span> {balance.toFixed(2)} €</span>
             </h2>
-            <div className="md:block flex justify-center">
-                <div className="bg-lime-700 p-5 my-5 md:w-full md:rounded-md rounded-l-md w-1/2 ">
+            <div className="md:block justify-center">
+                <div className="bg-lime-700 p-5 my-5 md:w-full md:rounded-md rounded-md whitespace-nowrap">
                     <h3>
                         Income <span> {income.toFixed(2)} €</span>
                     </h3>
                 </div>
-                <div className="bg-red-700 p-5 my-5 md:rounded-md md:w-full rounded-r-md w-1/2">
+                <div className="bg-red-700 p-5 md:rounded-md md:w-full rounded-md whitespace-nowrap">
                     <h3>
                         Expense <span>{expense.toFixed(2)} €</span>
                     </h3>

@@ -3,15 +3,15 @@ import { AppContext } from "../App";
 import { CiCircleRemove, CiEdit } from "react-icons/ci";
 
 function EventEntry() {
-    const { EventArray, setEventArray, startEditing } = useContext(AppContext);
+    const { eventArray, setEventArray, startEditing } = useContext(AppContext);
 
     function handleRemove(id) {
-        const updatedArray = EventArray.filter((event) => event.id !== id);
+        const updatedArray = eventArray.filter((event) => event.id !== id);
         setEventArray(updatedArray);
         localStorage.setItem("EventArray", JSON.stringify(updatedArray));
     }
 
-    if (EventArray.length === 0) {
+    if (eventArray.length === 0) {
         return <div className="font-bold">No entry yet</div>;
     }
 
@@ -19,7 +19,7 @@ function EventEntry() {
         <div className="border-teal-800 border-2 rounded-md p-5 mb-2">
             <h1 className="pb-4 font-bold">History</h1>
             <div className="lg:grid lg:grid-cols-2 gap-3 ">
-                {EventArray.map((event) => (
+                {eventArray.map((event) => (
                     <div key={event.id} id={event.id} className="text-white max-lg:pb-3">
                         <div className="flex align-baseline justify-between bg-teal-800 p-3 rounded-md">
                             <div>

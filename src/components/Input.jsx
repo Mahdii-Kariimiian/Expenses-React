@@ -102,7 +102,7 @@ function Input() {
                 value={text}
                 type="text"
                 name="transaction-text"
-                className="py-2 px-2 mb-1 border-grey-300 border-2 rounded-md"
+                className="py-2 px-2 mb-2 border-grey-300 border-2 rounded-md"
                 placeholder="Enter transaction"
                 required
             />
@@ -113,32 +113,36 @@ function Input() {
             <div className="flex gap-2">
                 <button
                     type="button"
-                    className={`bg-red-800 text-white rounded-md px-2 text-sm ${activeButton === "Expense" ? "bg-red-600" : ""} hover:bg-red-700`}
+                    className={`bg-red-800 text-white rounded-md py-[13.5px] px-2 text-sm ${
+                        activeButton === "Expense" ? "bg-red-600" : ""
+                    } hover:bg-red-700`}
                     onClick={() => handleButtonClick("Expense")}
                 >
                     Expense
                 </button>
                 <button
                     type="button"
-                    className={`bg-lime-800 text-white rounded-md px-2 text-sm ${activeButton === "Income" ? "bg-lime-600" : ""} hover:bg-lime-700`}
+                    className={`bg-lime-800 text-white rounded-md py-[13.5px] px-2 text-sm ${
+                        activeButton === "Income" ? "bg-lime-600" : ""
+                    } hover:bg-lime-700`}
                     onClick={() => handleButtonClick("Income")}
                 >
                     Income
                 </button>
-                <div>
+                <div className="flex-grow">
                     <input
                         onChange={handleAmountChange}
                         value={money}
                         type="number"
                         name="transaction-money"
-                        className="py-2 px-2 mb-1 border-grey-300 border-2 rounded-md"
+                        className="py-2 px-2 border-gray-300 border-2 rounded-md w-full"
                         placeholder="(negative - expense, positive - income)"
                         required
                     />
                 </div>
             </div>
 
-            <label className="pb-1" htmlFor="Categories">
+            <label className="pb-1 mt-2" htmlFor="Categories">
                 Categories
             </label>
             <select
@@ -162,15 +166,14 @@ function Input() {
                 <option value="other">Other</option>
             </select>
 
-            <div>
-                <button
-                    onClick={handleClick}
-                    className="whitespace-nowrap md:m-auto p-2 md:px-10 mt-3 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-600"
-                    type="submit"
-                >
-                    {editId ? "Save changes" : "Add transaction"}
-                </button>
-            </div>
+            <button
+                onClick={handleClick}
+                className="whitespace-nowrap md:m-auto p-2 md:px-10  w-full rounded-md bg-teal-800 text-white font-bold hover:bg-teal-600"
+                type="submit"
+            >
+                {editId ? "Save changes" : "Add transaction"}
+            </button>
+
             <ToastContainer />
         </form>
     );
